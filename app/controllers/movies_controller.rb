@@ -23,8 +23,10 @@ class MoviesController < ApplicationController
 
 #ensures that new movies are created for the current_user
   def create
-    @movie = current_user.movies.build(movie_params)
+    # puts movie_params=
 
+    @movie = current_user.movies.build(movie_params)
+    # puts "this is a movie", @movie
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
@@ -68,6 +70,8 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :movie_length, :director, :rating)
+      params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :image)
+      # p[:image] = p[:image].tempfile
+      # p
     end
 end
